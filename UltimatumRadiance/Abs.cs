@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
-using ModCommon.Util;
 using JetBrains.Annotations;
 using UnityEngine;
-using Logger = Modding.Logger;
+using Satchel;
 
 namespace UltimatumRadiance
 {
@@ -55,7 +54,7 @@ namespace UltimatumRadiance
 
         private void Awake()
         {
-            Log("Added AbsRad MonoBehaviour");
+            UltimatumRadiance.Instance.Log("Added AbsRad MonoBehaviour");
 
             _hm = gameObject.GetComponent<HealthManager>();
 
@@ -81,7 +80,7 @@ namespace UltimatumRadiance
 
         private void Start()
         {
-            Log("Changing fight variables...");
+            UltimatumRadiance.Instance.Log("Changing fight variables...");
 
             //HEALTH
             _hm.hp += fullSpikesHealth + onePlatHealth + platSpikesHealth; //We're adding new phases, so create more health to accomodate them
@@ -178,7 +177,7 @@ namespace UltimatumRadiance
             AddNailWall("Nail L Sweep 2", "COMB R2", 1, 1);
             AddNailWall("Nail R Sweep 2", "COMB L2", 1, 1);
 
-            Log("fin.");
+            UltimatumRadiance.Instance.Log("fin.");
 
         }
 
@@ -279,7 +278,7 @@ namespace UltimatumRadiance
 
             if ((_attackChoices.FsmVariables.GetFsmInt("Arena").Value == 2) && !arena2Set) //Platform phase!
             {
-                Logger.Log("[Ultimatum Radiance] Starting Phase 2");
+                UltimatumRadiance.Instance.Log("Starting Phase 2");
                 arena2Set = true;
 
                 _spellControl.RemoveAction("Q2 Land", 0); //Revert ddark to normal behavior
@@ -315,7 +314,7 @@ namespace UltimatumRadiance
                     if (!onePlatSet)
                     {
                         onePlatSet = true;
-                        Log("Removing upper right platform");
+                        UltimatumRadiance.Instance.Log("Removing upper right platform");
                         _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.80f;
                     }
                 }
@@ -359,7 +358,7 @@ namespace UltimatumRadiance
         [UsedImplicitly]
         public void DivePunishment()
         {
-            Log("YOU WON'T CHEESE SPIKES IN THIS TOWN AGAIN");
+            UltimatumRadiance.Instance.Log("YOU WON'T CHEESE SPIKES IN THIS TOWN AGAIN");
             HeroController.instance.TakeDamage(gameObject, GlobalEnums.CollisionSide.bottom, 1, 0); //Knight takes a hit
             EventRegister.SendEvent("HERO DAMAGED"); //Tells the UI to refresh
         }
@@ -391,11 +390,6 @@ namespace UltimatumRadiance
                 if (t.Name == eventName) return t;
             }
             return null;
-        }
-
-        private static void Log(object obj)
-        {
-            Logger.Log("[Ultimatum Radiance] " + obj);
         }
     }
 }
