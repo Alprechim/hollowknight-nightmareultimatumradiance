@@ -83,12 +83,12 @@ namespace UltimatumRadiance
             UltimatumRadiance.Instance.Log("Changing fight variables...");
 
             //HEALTH
-            _hm.hp += fullSpikesHealth + onePlatHealth + platSpikesHealth; //We're adding new phases, so create more health to accomodate them
-            _phaseControl.FsmVariables.GetFsmInt("P2 Spike Waves").Value += fullSpikesHealth + onePlatHealth + platSpikesHealth; //Increase phase health threshholds
-            _phaseControl.FsmVariables.GetFsmInt("P3 A1 Rage").Value += onePlatHealth + platSpikesHealth;
-            _phaseControl.FsmVariables.GetFsmInt("P4 Stun1").Value += onePlatHealth + platSpikesHealth;
-            _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value += onePlatHealth + platSpikesHealth;
-            _control.GetAction<SetHP>("Scream", 7).hp = 1000 + onePlatHealth + platSpikesHealth; //Increase health for final phase
+            _hm.hp += 1850; //We're adding new phases, so create more health to accomodate them
+            _phaseControl.FsmVariables.GetFsmInt("P2 Spike Waves").Value += 1850; //Increase phase health threshholds
+            _phaseControl.FsmVariables.GetFsmInt("P3 A1 Rage").Value += 1050;
+            _phaseControl.FsmVariables.GetFsmInt("P4 Stun1").Value += 1050;
+            _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value += 1050;
+            _control.GetAction<SetHP>("Scream", 7).hp = 1550; //Increase health for final phase
 
             //PLATFORM SPIKES
             //Create spikes on top platform
@@ -102,12 +102,12 @@ namespace UltimatumRadiance
             }
 
             //ORB BARRAGE
-            _attackCommands.GetAction<Wait>("Orb Antic", 0).time = .75f; //INCREASE wait time at start of orb barrage, to increase chance player isn't in a nail wall or something
-            _attackCommands.GetAction<SetIntValue>("Orb Antic", 1).intValue = 7; //Spawn more orbs
-            _attackCommands.GetAction<RandomInt>("Orb Antic", 2).min = 6;
-            _attackCommands.GetAction<RandomInt>("Orb Antic", 2).max = 8;
-            _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.40f; //Decrease telegraph time to spawn orb
-            _attackCommands.GetAction<Wait>("Orb Pause", 0).time = 0.01f; //Remove time to start spawning new orb
+            _attackCommands.GetAction<Wait>("Orb Antic", 0).time = 0.7f; //INCREASE wait time at start of orb barrage, to increase chance player isn't in a nail wall or something
+            _attackCommands.GetAction<SetIntValue>("Orb Antic", 1).intValue = 9; //Spawn more orbs
+            _attackCommands.GetAction<RandomInt>("Orb Antic", 2).min = 8;
+            _attackCommands.GetAction<RandomInt>("Orb Antic", 2).max = 10;
+            _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.55f; //Decrease telegraph time to spawn orb
+            _attackCommands.GetAction<Wait>("Orb Pause", 0).time = 0.05f; //Remove time to start spawning new orb
             _attackChoices.GetAction<Wait>("Orb Recover", 0).time = 1.25f; //Increase downtime at the end of the barrage, just like at the start
 
             //RADIAL NAIL BARRAGE
@@ -162,20 +162,20 @@ namespace UltimatumRadiance
             _control.GetAction<Wait>("Rage Comb", 0).time = 0.6f;
 
             //HORIZONTAL NAIL COMB
-            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 1).delay = .5f;
-            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 1).delay = .5f + (nailWallDelay * 2);
-            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 2).delay = .5f + (nailWallDelay * 4);
-            _attackChoices.GetAction<Wait>("Nail L Sweep", 3).time = 1f + (nailWallDelay * 5);
-            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 1).delay = .5f;
-            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 1).delay = .5f + (nailWallDelay * 2);
-            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 2).delay = .5f + (nailWallDelay * 4);
-            _attackChoices.GetAction<Wait>("Nail R Sweep", 3).time = 1f + (nailWallDelay * 5);
-            AddNailWall("Nail L Sweep", "COMB R", .5f + nailWallDelay, 1);
-            AddNailWall("Nail R Sweep", "COMB L", .5f + nailWallDelay, 1);
-            AddNailWall("Nail L Sweep", "COMB R", .5f + (nailWallDelay * 3), 1);
-            AddNailWall("Nail R Sweep", "COMB L", .5f + (nailWallDelay * 3), 1);
-            AddNailWall("Nail L Sweep 2", "COMB R2", 1, 1);
-            AddNailWall("Nail R Sweep 2", "COMB L2", 1, 1);
+            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 1).delay = 0.5f;
+            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 1).delay = 2.1f;
+            _attackChoices.GetAction<SendEventByName>("Nail L Sweep", 2).delay = 3.7f;
+            _attackChoices.GetAction<Wait>("Nail L Sweep", 3).time = 5f;
+            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 1).delay = 0.5f;
+            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 1).delay = 2.1f;
+            _attackChoices.GetAction<SendEventByName>("Nail R Sweep", 2).delay = 3.7f;
+            _attackChoices.GetAction<Wait>("Nail R Sweep", 3).time = 5f;
+            AddNailWall("Nail L Sweep", "COMB R", 1.3f, 1);
+            AddNailWall("Nail R Sweep", "COMB L", 1.3f, 1);
+            AddNailWall("Nail L Sweep", "COMB R", 2.9f, 1);
+            AddNailWall("Nail R Sweep", "COMB L", 2.9f, 1);
+            AddNailWall("Nail L Sweep 2", "COMB R2", 1f, 1);
+            AddNailWall("Nail R Sweep 2", "COMB L2", 1f, 1);
 
             UltimatumRadiance.Instance.Log("fin.");
 
@@ -213,7 +213,7 @@ namespace UltimatumRadiance
                 }
             }
 
-            if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P2 Spike Waves").Value - fullSpikesHealth && !fullSpikesSet) //NEW PHASE
+            if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P2 Spike Waves").Value - 800 && !fullSpikesSet) //NEW PHASE
             {
                 fullSpikesSet = true;
 
@@ -232,33 +232,30 @@ namespace UltimatumRadiance
 
                 _spikeMasterControl.SetState("Spike Waves");
 
-                //Prevent ddark cheese; if you try to dive onto spikes you take damage
-                StartCoroutine(AddDivePunishment());
-
                 //More generous orbs
-                _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 1.5f;
-                _attackCommands.GetAction<SetIntValue>("Orb Antic", 1).intValue = 2;
-                _attackCommands.GetAction<RandomInt>("Orb Antic", 2).min = 1;
-                _attackCommands.GetAction<RandomInt>("Orb Antic", 2).max = 3;
+                _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 1f;
+                _attackCommands.GetAction<SetIntValue>("Orb Antic", 1).intValue = 5;
+                _attackCommands.GetAction<RandomInt>("Orb Antic", 2).min = 4;
+                _attackCommands.GetAction<RandomInt>("Orb Antic", 2).max = 6;
 
                 //Slower radial bursts
-                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 1", 2).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 1", 3).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 1", 8).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 1", 9).delay = .85f;
-                _attackCommands.GetAction<Wait>("EB 1", 10).time = 1.92f;
+                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 1", 2).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 1", 3).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 1", 8).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 1", 9).delay = 0.7f;
+                _attackCommands.GetAction<Wait>("EB 1", 10).time = 0.85f;
 
-                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 2", 3).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 2", 4).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 2", 8).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 2", 9).delay = .85f;
-                _attackCommands.GetAction<Wait>("EB 2", 10).time = 1.2f;
+                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 2", 3).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 2", 4).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 2", 8).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 2", 9).delay = 0.7f;
+                _attackCommands.GetAction<Wait>("EB 2", 10).time = 0.85f;
 
-                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 3", 3).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 3", 4).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 3", 8).delay = .75f;
-                _attackCommands.GetAction<SendEventByName>("EB 3", 9).delay = .85f;
-                _attackCommands.GetAction<Wait>("EB 3", 10).time = 1.2f;
+                _attackCommands.GetAction<AudioPlayerOneShotSingle>("EB 3", 3).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 3", 4).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 3", 8).delay = 0.58f;
+                _attackCommands.GetAction<SendEventByName>("EB 3", 9).delay = 0.7f;
+                _attackCommands.GetAction<Wait>("EB 3", 10).time = 0.85f;
 
                 //Nail sweeps are disabled, too bullshit with spikes everywhere
                 _attackChoices.ChangeTransition("A1 Choice", "NAIL L SWEEP", "Beam Sweep L");
@@ -286,7 +283,7 @@ namespace UltimatumRadiance
                 _attackCommands.GetAction<SetIntValue>("Orb Antic", 1).intValue = 6; //Reset orbs
                 _attackCommands.GetAction<RandomInt>("Orb Antic", 2).min = 5;
                 _attackCommands.GetAction<RandomInt>("Orb Antic", 2).max = 7;
-                _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.60f;
+                _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.6f;
 
                 //Beam sweepers cover a larger area
                 /*Normally the FSM handles this, but I'm modifying the numbers through code instead
@@ -307,7 +304,7 @@ namespace UltimatumRadiance
 
             if (gameObject.transform.position.y >= 150f) //Indicates the final phase has started
             {
-                if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value - onePlatHealth)
+                if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value -450)
                 {
                     //When the player deals some damage, remove the right platform
                     GameObject.Find("Radiant Plat Small (10)").LocateMyFSM("radiant_plat").ChangeState(GetFsmEventByName(GameObject.Find("Radiant Plat Small (10)").LocateMyFSM("radiant_plat"), "SLOW VANISH"));
@@ -318,7 +315,7 @@ namespace UltimatumRadiance
                         _attackCommands.GetAction<Wait>("Orb Summon", 2).time = 0.80f;
                     }
                 }
-                if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value - onePlatHealth - platSpikesHealth)
+                if (_hm.hp < _phaseControl.FsmVariables.GetFsmInt("P5 Acend").Value - 1050)
                 {
                     //When the player deals some more damage, spikes on the left platform go up
                     foreach(GameObject spike in _spikes)
