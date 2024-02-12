@@ -50,12 +50,10 @@ namespace UltimatumRadiance
         {
             switch (key)
             {
-                case "ABSOLUTE_RADIANCE_SUPER": return "Ultimatum";
+                case "ABSOLUTE_RADIANCE_SUPER": return "Nightmare Ultimatum";
                 case "GG_S_RADIANCE": return "God of light, sworn to crush any rebellion";
                 case "GODSEEKER_RADIANCE_STATUE":
-                    return "Incredible! For a mere Speck to take up arms and defy the brilliant deity's ultimatum is to be consigned to oblivion, and yet thou survive!\n\n" +
-                        "But couldst thou ever hope to overcome that mighty God tuned at the core of dream and mind, when met in perfect state, at peak of all others? We think not!\n\n" +
-                        "Seriously, thy time is probably better spent elsewhere.";
+                    return "Congratulations on beating Nightmare Ultimatum Radiance!\n\nNow try doing it in my Pantheon.\n\nAnd don't forget to subscribe to youtube.com/fireb0rn!";
                 default: return orig;
             }
         }
